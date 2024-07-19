@@ -1,4 +1,3 @@
-" Options
 set encoding=utf8
 set clipboard=unnamedplus " Enables the clipboard between Vim/Neovim and other applications.
 set completeopt=noinsert,menuone,noselect " Modifies the auto-complete menu to behave more like an IDE.
@@ -21,14 +20,17 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin '907th/vim-auto-save'
 Plugin 'NLKNguyen/papercolor-theme'
 Bundle 'm2mdas/phpcomplete-extended-laravel'
 call vundle#end()            " required
 
 let g:kite_supported_languages = ['python', 'javascript']
 call plug#begin('~/.vim/plugged')
+Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
@@ -42,13 +44,20 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
-
+Plug 'noahfrederick/vim-composer'
 Plug 'neanias/everforest-nvim', { 'branch': 'main' }
 Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm ci'}
 " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'kristijanhusak/vim-js-file-import'
+Plug 'SirVer/ultisnips' 
+Plug 'honza/vim-snippets'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'kristijanhusak/vim-js-file-import'
+
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -92,3 +101,21 @@ let g:NERDTreeIndicatorMapCustom = {
       \   "Unknown": "?"
       \ }
       \}
+
+set mouse=v
+
+nnoremap <C-g> :NERDTree<CR>
+nnoremap <C-h> :NERDTreeClose<CR>
+map  gc :tabclose<CR>
+nnoremap <leader>p :Prettier<CR>
+
+let g:NERDTreeQuitOnOpen=0
+
+let g:auto_save = 0
+set omnifunc=phpcomplete#CompletePHP
+set tagfunc=jsfileimport#tagfunc
+
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
+set mouse=v
